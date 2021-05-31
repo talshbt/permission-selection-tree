@@ -19,12 +19,7 @@ export class ChecklistDatabase {
   }
 
   initialize(permissionData) {
-    // Build the tree nodes from Json object. The result is a list of `TodoItemNode` with nested
-    //     file node as children.
     return this.buildFileTree(permissionData, 0);
-
-    // Notify the change.
-    // this.dataChange.next(data);
   }
 
   rootLevelNodes: string[] = [];
