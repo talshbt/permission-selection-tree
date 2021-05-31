@@ -95,20 +95,21 @@ ngOnInit(): void {
         // this.parents.push(parentNode)
         if (this.parents.indexOf(parentNode) == -1) {
           this.parents.push(parentNode);
+        }else{
+          this.parents.splice(this.parents.indexOf(parentNode),1)
         }
         //console.log(parentNode);
-        console.log(this.parents)
-        // this.dataSource.data = this._database.initialize(this.filterTree(permissionData));
+        this.dataSource.data = this._database.initialize(this.filterTree());
 
       // this.dataSource.data = this.database.initialData(permissionData);
     });
 }
 
 parents = []
-filterTree(permissionData){
+filterTree(){
   let filteredTree = {};
 
-  permissionData.forEach(parent=>{
+  this.parents.forEach(parent=>{
    
     filteredTree[parent] = TREE_FULL_DATA[parent];
     // console.log(parent)
