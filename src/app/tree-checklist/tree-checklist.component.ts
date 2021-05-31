@@ -7,7 +7,7 @@ import { ChecklistDatabase } from './check-list-database';
 import { TodoItemFlatNode } from './todo-item-flat-node';
 import { TodoItemNode } from './todo-item-node';
 
-export const TREE_DATA = {
+export const TREE_FULL_DATA = {
   'Tribe': {
     'Almond Meal flour': null,
     'Organic eggs': null,
@@ -91,21 +91,22 @@ ngOnInit(): void {
     });
 
       this.permissionService.getPermission().subscribe(permissionData => {
-        this.dataSource.data = this._database.initialize(TREE_DATA);
-        this.filterTree(permissionData)
+        this.dataSource.data = this._database.initialize(this.filterTree(permissionData));
 
       // this.dataSource.data = this.database.initialData(permissionData);
     });
 }
-filteredTree = {};
 filterTree(permissionData){
+  let filteredTree = {};
+
   permissionData.forEach(parent=>{
    
-    this.filteredTree[parent] = TREE_DATA[parent];
+    filteredTree[parent] = TREE_FULL_DATA[parent];
     // console.log(parent)
       // console.log(TREE_DATA[parent])
   })
-   console.log(this.filteredTree)
+
+  return filteredTree;
 //  this.arr = TREE_DATA;
 
 }
