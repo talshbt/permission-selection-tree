@@ -8,17 +8,44 @@ import { TodoItemFlatNode } from './todo-item-flat-node';
 import { TodoItemNode } from './todo-item-node';
 
 export const TREE_DATA = {
-  Tribe: {
+  'Tribe': {
     'Almond Meal flour': null,
     'Organic eggs': null,
     'Protein Powder': null
   },
-  Mesila: {
+  'Mesila': {
     'Cook dinner':null,
     'Read the Material Design spec':null,
     'Upgrade Application to Angular':null
-  }
+  },
+
+   'Rest': {
+    'Cook dinner':null,
+    'Read the Material Design spec':null,
+    'Upgrade Application to Angular':null
+  },
+   'Web Client': {
+    'Cook dinner':null,
+    'Read the Material Design spec':null,
+    'Upgrade Application to Angular':null
+  },
+     'Main Frame': {
+    'Cook dinner':null,
+    'Read the Material Design spec':null,
+    'Upgrade Application to Angular':null
+  },
+    'WSO2': {
+    'Cook dinner':null,
+    'Read the Material Design spec':null,
+    'Upgrade Application to Angular':null
+  },
+    'Splunk': {
+    'Cook dinner':null,
+    'Read the Material Design spec':null,
+    'Upgrade Application to Angular':null
+  },
 };
+
 
 @Component({
   selector: 'app-tree-checklist',
