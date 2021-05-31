@@ -5,24 +5,6 @@ import { TodoItemFlatNode } from './todo-item-flat-node';
 import { TodoItemNode } from './todo-item-node';
 // import { TREE_DATA } from './tree-data';
 
-export const TREE_DATA = {
-  Tribe: {
-    'Almond Meal flour': null,
-    'Organic eggs': null,
-    'Protein Powder': null,
-    Fruits: {
-      Apple: null,
-      Berries: ['Blueberry', 'Raspberry'],
-      Orange: null
-    }
-  },
-  Mesila: [
-    'Cook dinner',
-    'Read the Material Design spec',
-    'Upgrade Application to Angular'
-  ]
-};
-
 @Injectable({ providedIn: 'root' })
 export class ChecklistDatabase {
   treeData = [];
@@ -39,7 +21,7 @@ export class ChecklistDatabase {
   initialize(permissionData) {
     // Build the tree nodes from Json object. The result is a list of `TodoItemNode` with nested
     //     file node as children.
-    return this.buildFileTree(TREE_DATA, 0);
+    return this.buildFileTree(permissionData, 0);
 
     // Notify the change.
     // this.dataChange.next(data);

@@ -7,6 +7,19 @@ import { ChecklistDatabase } from './check-list-database';
 import { TodoItemFlatNode } from './todo-item-flat-node';
 import { TodoItemNode } from './todo-item-node';
 
+export const TREE_DATA = {
+  Tribe: {
+    'Almond Meal flour': null,
+    'Organic eggs': null,
+    'Protein Powder': null
+  },
+  Mesila: [
+    'Cook dinner',
+    'Read the Material Design spec',
+    'Upgrade Application to Angular'
+  ]
+};
+
 @Component({
   selector: 'app-tree-checklist',
   templateUrl: './tree-checklist.component.html',
@@ -51,7 +64,8 @@ ngOnInit(): void {
     });
 
       this.permissionService.getPermission().subscribe(permissionData => {
-            this.dataSource.data = this._database.initialize(permissionData);
+        permissionData = TREE_DATA;
+        this.dataSource.data = this._database.initialize(TREE_DATA);
 
       // this.dataSource.data = this.database.initialData(permissionData);
     });
