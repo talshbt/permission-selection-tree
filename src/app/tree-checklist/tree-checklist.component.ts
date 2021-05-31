@@ -46,10 +46,10 @@ ngOnInit(): void {
       this.isExpandable, this.getChildren);
     this.treeControl = new FlatTreeControl<TodoItemFlatNode>(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-
-    this._database.dataChange.subscribe(data => {
-      this.dataSource.data = data;
-    });
+    this.dataSource.data = this._database.initialize();
+    // this._database.dataChange.subscribe(data => {
+    //   this.dataSource.data = data;
+    // });
 
       this.permissionService.getPermission().subscribe(permissionData => {
         console.log(permissionData)
