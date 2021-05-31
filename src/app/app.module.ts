@@ -13,7 +13,6 @@ import { AppComponent } from './app.component';
 import { MultiSelectSearchComponent } from './multi-select-search/multi-select-search.component';
 import { TreeDynamicComponent } from './tree-dynamic/tree-dynamic.component';
 import { TreeChecklistComponent } from './tree-checklist/tree-checklist.component';
-import { FilterTreeComponent } from './filter-tree/filter-tree.component';
 
 @NgModule({
   imports: [
@@ -31,7 +30,6 @@ import { FilterTreeComponent } from './filter-tree/filter-tree.component';
     MultiSelectSearchComponent,
     TreeDynamicComponent,
     TreeChecklistComponent,
-    FilterTreeComponent
   ],
 
   entryComponents: [TreeChecklistComponent],
