@@ -90,12 +90,21 @@ ngOnInit(): void {
       this.dataSource.data = data;
     });
 
-      this.permissionService.getPermission().subscribe(permissionData => {
-        this.dataSource.data = this._database.initialize(this.filterTree(permissionData));
+      this.permissionService.getPermission().subscribe(parentNode => {
+
+        // this.parents.push(parentNode)
+        if (this.parents.indexOf(parentNode) == -1) {
+          this.parents.push(parentNode);
+        }
+        //console.log(parentNode);
+        console.log(this.parents)
+        // this.dataSource.data = this._database.initialize(this.filterTree(permissionData));
 
       // this.dataSource.data = this.database.initialData(permissionData);
     });
 }
+
+parents = []
 filterTree(permissionData){
   let filteredTree = {};
 
