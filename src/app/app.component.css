@@ -1,0 +1,13 @@
+ul.custom {
+  list-style-type: none; /* Remove bullets */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margins */
+}
+ul li {
+  margin: 10px;
+}
+
+::ng-deep .custom-style{
+  background-color:brown;
+  color:white;
+}

@@ -1,0 +1,18 @@
+<!-- <h3>Multiple selection</h3> -->
+<p>
+  <mat-form-field>
+    <mat-select [formControl]="permissionMultiCtrl" placeholder="Chosse" [multiple]="true" #multiSelect>
+      <ngx-mat-select-search [formControl]="permissionMultiFilterCtrl"></ngx-mat-select-search>
+      <mat-option (onSelectionChange)="change($event)" *ngFor="let permission of filteredPermissionsMulti | async"
+        [value]="permission">
+        {{permission.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</p>
+<!-- <p>
+  Selected permissions:
+</p>
+<ul *ngFor="let permission of permissionMultiCtrl?.value">
+  <li>{{permission.name}}</li>
+</ul> -->
