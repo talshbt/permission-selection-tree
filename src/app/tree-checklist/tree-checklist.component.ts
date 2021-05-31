@@ -14,34 +14,34 @@ export const TREE_FULL_DATA = {
     'c': null
   },
   'Mesila': {
-    'a':null,
-    'e':null,
-    'f':null
+    'a': null,
+    'e': null,
+    'f': null
   },
-   'Rest': {
-    'g':null,
-    'h':null,
-    'i':null
+  'Rest': {
+    'g': null,
+    'h': null,
+    'i': null
   },
-   'Web Client': {
-    'Cook dinner':null,
-    'Read the Material Design spec':null,
-    'Upgrade Application to Angular':null
+  'Web Client': {
+    'Cook dinner': null,
+    'Read the Material Design spec': null,
+    'Upgrade Application to Angular': null
   },
-     'Main Frame': {
-    'Cook dinner':null,
-    'Read the Material Design spec':null,
-    'Upgrade Application to Angular':null
+  'Main Frame': {
+    'Cook dinner': null,
+    'Read the Material Design spec': null,
+    'Upgrade Application to Angular': null
   },
-    'WSO2': {
-    'Cook dinner':null,
-    'Read the Material Design spec':null,
-    'Upgrade Application to Angular':null
+  'WSO2': {
+    'Cook dinner': null,
+    'Read the Material Design spec': null,
+    'Upgrade Application to Angular': null
   },
-    'Splunk': {
-    'Cook dinner':null,
-    'Read the Material Design spec':null,
-    'Upgrade Application to Angular':null
+  'Splunk': {
+    'Cook dinner': null,
+    'Read the Material Design spec': null,
+    'Upgrade Application to Angular': null
   },
 };
 
@@ -76,12 +76,12 @@ export class TreeChecklistComponent implements OnInit {
   /** The selection for checklist */
   checklistSelection = new SelectionModel<TodoItemFlatNode>(true /* multiple */);
 
-  constructor(private _database: ChecklistDatabase,  private permissionService: PermissionService) {
-    
-  }
-ngOnInit(): void {
+  constructor(private _database: ChecklistDatabase, private permissionService: PermissionService) {
 
-  this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel,
+  }
+  ngOnInit(): void {
+
+    this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel,
       this.isExpandable, this.getChildren);
     this.treeControl = new FlatTreeControl<TodoItemFlatNode>(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
@@ -89,36 +89,36 @@ ngOnInit(): void {
       this.dataSource.data = data;
     });
 
-      this.permissionService.getPermission().subscribe(parentNode => {
+    this.permissionService.getPermission().subscribe(parentNode => {
 
-        // this.parents.push(parentNode)
-        if (this.parents.indexOf(parentNode) == -1) {
-          this.parents.push(parentNode);
-        }else{
-          this.parents.splice(this.parents.indexOf(parentNode),1)
-        }
-        //console.log(parentNode);
-        this.dataSource.data = this._database.initialize(this.filterTree());
+      // this.parents.push(parentNode)
+      if (this.parents.indexOf(parentNode) == -1) {
+        this.parents.push(parentNode);
+      } else {
+        this.parents.splice(this.parents.indexOf(parentNode), 1)
+      }
+      //console.log(parentNode);
+      this.dataSource.data = this._database.initialize(this.filterTree());
 
       // this.dataSource.data = this.database.initialData(permissionData);
     });
-}
+  }
 
-parents = []
-filterTree(){
-  let filteredTree = {};
+  parents = []
+  filterTree() {
+    let filteredTree = {};
 
-  this.parents.forEach(parent=>{
-   
-    filteredTree[parent] = TREE_FULL_DATA[parent];
-    // console.log(parent)
+    this.parents.forEach(parent => {
+
+      filteredTree[parent] = TREE_FULL_DATA[parent];
+      // console.log(parent)
       // console.log(TREE_DATA[parent])
-  })
+    })
 
-  return filteredTree;
-//  this.arr = TREE_DATA;
+    return filteredTree;
+    //  this.arr = TREE_DATA;
 
-}
+  }
 
   getLevel = (node: TodoItemFlatNode) => node.level;
 
@@ -136,8 +136,8 @@ filterTree(){
   transformer = (node: TodoItemNode, level: number) => {
     const existingNode = this.nestedNodeMap.get(node);
     const flatNode = existingNode && existingNode.item === node.item
-        ? existingNode
-        : new TodoItemFlatNode();
+      ? existingNode
+      : new TodoItemFlatNode();
     flatNode.item = node.item;
     flatNode.level = level;
     flatNode.expandable = !!node.children?.length;
@@ -178,7 +178,7 @@ filterTree(){
 
   /** Toggle a leaf to-do item selection. Check all the parents to see if they changed */
   todoLeafItemSelectionToggle(node: TodoItemFlatNode): void {
-    
+
     this.checklistSelection.toggle(node);
     this.findDup(node)
     this.checkAllParentsSelection(node);
@@ -237,15 +237,15 @@ filterTree(){
   //   }
   // }
 
-   findDup(selectedNode) {
+  findDup(selectedNode) {
     const parent = this.getParentNode(selectedNode);
     // console.log(this.treeControl.dataNodes)
-this.treeControl.dataNodes.forEach(x=>{
-  if(x.level === 1 && this.getParentNode(x).item !== parent.item){
-    console.log(x)
-  }
-  // console.log(x)
-})
+    this.treeControl.dataNodes.forEach(x => {
+      if (x.level === 1 && this.getParentNode(x).item !== parent.item && selectedNode.item === x.item) {
+        console.log(x)
+      }
+      // console.log(x)
+    })
     // this.parents.forEach(x=>{
     //   this.treeControl.dataNodes
     // })
