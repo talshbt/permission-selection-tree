@@ -2,12 +2,12 @@ export const TREE_DATA = {
   Tribe: {
     'Almond Meal flour': null,
     'Organic eggs': null,
-    'Protein Powder': null,
-    Fruits: {
-      Apple: null,
-      Berries: ['Blueberry', 'Raspberry'],
-      Orange: null
-    }
+    'Protein Powder': null
+    // Fruits: {
+    //   Apple: null,
+    //   Berries: ['Blueberry', 'Raspberry'],
+    //   Orange: null
+    // }
   },
   Mesila: [
     'Cook dinner',
