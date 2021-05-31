@@ -19,7 +19,6 @@ export class ChecklistDatabase {
   }
 
   initialize(permissionData) {
-    console.log(permissionData);
     return this.buildFileTree(permissionData, 0);
   }
 

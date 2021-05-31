@@ -18,7 +18,6 @@ export const TREE_FULL_DATA = {
     'Read the Material Design spec':null,
     'Upgrade Application to Angular':null
   },
-
    'Rest': {
     'Cook dinner':null,
     'Read the Material Design spec':null,
@@ -165,6 +164,7 @@ filterTree(){
 
   /** Toggle the to-do item selection. Select/deselect all the descendants node */
   todoItemSelectionToggle(node: TodoItemFlatNode): void {
+    // console.log(node)
     this.checklistSelection.toggle(node);
     const descendants = this.treeControl.getDescendants(node);
     this.checklistSelection.isSelected(node)
@@ -178,6 +178,8 @@ filterTree(){
 
   /** Toggle a leaf to-do item selection. Check all the parents to see if they changed */
   todoLeafItemSelectionToggle(node: TodoItemFlatNode): void {
+       console.log(node)
+
     this.checklistSelection.toggle(node);
     this.checkAllParentsSelection(node);
   }
@@ -226,13 +228,30 @@ filterTree(){
   }
 
 
-  filterChanged(filterText: string) {
-    this._database.filter(filterText);
-    if (filterText) {
-      this.treeControl.expandAll();
-    } else {
-      this.treeControl.collapseAll();
-    }
+  // filterChanged(filterText: string) {
+  //   this._database.filter(filterText);
+  //   if (filterText) {
+  //     this.treeControl.expandAll();
+  //   } else {
+  //     this.treeControl.collapseAll();
+  //   }
+  // }
+
+   onGetAll(selectedNode) {
+    const parent = this.getParentNode(selectedNode);
+    this.dataSource.data.forEach(node => {
+        const descendants = this.treeControl.getDescendants(node);
+        console.log(node)
+
+
+      // if (descendants.length && parent.item !== node.item) {
+      //   descendants.forEach(child => {
+      //     if (child.item === selectedNode.item) {
+      //       this.checklistSelection.toggle(child);
+      //     }
+      //   });
+      // }
+    });
   }
 
 }
