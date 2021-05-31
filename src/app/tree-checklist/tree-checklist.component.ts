@@ -13,11 +13,11 @@ export const TREE_DATA = {
     'Organic eggs': null,
     'Protein Powder': null
   },
-  Mesila: [
-    'Cook dinner',
-    'Read the Material Design spec',
-    'Upgrade Application to Angular'
-  ]
+  Mesila: {
+    'Cook dinner':null,
+    'Read the Material Design spec':null,
+    'Upgrade Application to Angular':null
+  }
 };
 
 @Component({
@@ -64,11 +64,23 @@ ngOnInit(): void {
     });
 
       this.permissionService.getPermission().subscribe(permissionData => {
-        permissionData = TREE_DATA;
         this.dataSource.data = this._database.initialize(TREE_DATA);
+        this.filterTree(permissionData)
 
       // this.dataSource.data = this.database.initialData(permissionData);
     });
+}
+filteredTree = {};
+filterTree(permissionData){
+  permissionData.forEach(parent=>{
+   
+    this.filteredTree[parent] = TREE_DATA[parent];
+    // console.log(parent)
+      // console.log(TREE_DATA[parent])
+  })
+   console.log(this.filteredTree)
+//  this.arr = TREE_DATA;
+
 }
 
   getLevel = (node: TodoItemFlatNode) => node.level;
