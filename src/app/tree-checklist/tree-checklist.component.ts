@@ -243,6 +243,7 @@ export class TreeChecklistComponent implements OnInit {
     this.treeControl.dataNodes.forEach(x => {
       if (x.level === 1 && this.getParentNode(x).item !== parent.item && selectedNode.item === x.item) {
         console.log(x)
+         this.checklistSelection.toggle(x);
       }
       // console.log(x)
     })
