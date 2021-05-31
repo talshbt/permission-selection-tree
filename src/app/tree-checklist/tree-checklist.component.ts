@@ -52,6 +52,7 @@ ngOnInit(): void {
     });
 
       this.permissionService.getPermission().subscribe(permissionData => {
+        console.log(permissionData)
       // this.dataSource.data = this.database.initialData(permissionData);
     });
 }
