@@ -10,6 +10,6 @@ export class TodoItemFlatNode {
   constructor(
     public item: string,
     public level: number,
-    public expandable: boolean
+    public expandable: boolean,
   ) {}
 }

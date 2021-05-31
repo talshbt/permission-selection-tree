@@ -4,4 +4,5 @@ import { Injectable } from '@angular/core';
 export class TodoItemNode {
   children: TodoItemNode[];
   item: string;
+  hasPermission: boolean;
 }

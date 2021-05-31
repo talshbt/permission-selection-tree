@@ -9,10 +9,11 @@ import { TodoItemNode } from './todo-item-node';
 
 export const TREE_FULL_DATA = {
   'Tribe': {
-    'a': null,
-    'b': null,
-    'c': null
-  },
+    'a': true,
+   'b': null,
+    'c': null,
+  }
+  ,
   'Mesila': {
     'a': null,
     'e': null,
@@ -98,7 +99,8 @@ export class TreeChecklistComponent implements OnInit {
         this.parents.splice(this.parents.indexOf(parentNode), 1)
       }
       //console.log(parentNode);
-      this.dataSource.data = this._database.initialize(this.filterTree());
+      const filterTree = this.filterTree()
+      this.dataSource.data = this._database.initialize(filterTree);
 
       // this.dataSource.data = this.database.initialData(permissionData);
     });
@@ -239,31 +241,16 @@ export class TreeChecklistComponent implements OnInit {
 
   findDup(selectedNode) {
     const parent = this.getParentNode(selectedNode);
-    // console.log(this.treeControl.dataNodes)
-    this.treeControl.dataNodes.forEach(x => {
-      if (x.level === 1 && this.getParentNode(x).item !== parent.item && selectedNode.item === x.item) {
-        console.log(x)
-         this.checklistSelection.toggle(x);
+    this.treeControl.dataNodes.forEach(child => {
+      if (child.level === 1 && this.getParentNode(child).item !== parent.item && selectedNode.item === child.item) {
+        console.log(child)
+         this.checklistSelection.toggle(child);
       }
-      // console.log(x)
     })
-    // this.parents.forEach(x=>{
-    //   this.treeControl.dataNodes
-    // })
-    // console.log(this.treeControl.getDescendants(parent))
-    // this.dataSource.data.forEach(parentNode => {
-    //      const descendants = parentNode.children;
+  }
 
+  initSelections(){
 
-    //   if (descendants.length && parent.item !== parentNode.item) {
-    //     descendants.forEach(child => {
-    //       if (child.item === selectedNode.item) {
-    //         console.log(child)
-    //         this.checklistSelection.toggle(child);
-    //       }
-    //     });
-    //   }
-    // });
   }
 
 }

@@ -44,7 +44,7 @@ export class ChecklistDatabase {
         if (typeof value === 'object') {
           node.children = this.buildFileTree(value, level + 1);
         } else {
-          node.item = value;
+          node.hasPermission = true;
         }
       }
 
