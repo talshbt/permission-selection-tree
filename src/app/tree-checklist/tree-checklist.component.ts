@@ -179,7 +179,7 @@ filterTree(){
   /** Toggle a leaf to-do item selection. Check all the parents to see if they changed */
   todoLeafItemSelectionToggle(node: TodoItemFlatNode): void {
        console.log(node)
-
+this.findDup(node)
     this.checklistSelection.toggle(node);
     this.checkAllParentsSelection(node);
   }
@@ -237,7 +237,7 @@ filterTree(){
   //   }
   // }
 
-   onGetAll(selectedNode) {
+   findDup(selectedNode) {
     const parent = this.getParentNode(selectedNode);
     this.dataSource.data.forEach(node => {
         const descendants = this.treeControl.getDescendants(node);
