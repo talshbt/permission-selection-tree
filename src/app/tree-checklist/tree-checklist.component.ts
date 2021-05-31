@@ -239,20 +239,30 @@ filterTree(){
 
    findDup(selectedNode) {
     const parent = this.getParentNode(selectedNode);
-    console.log(this.treeControl.getDescendants(parent))
-    this.dataSource.data.forEach(parentNode => {
-        // const descendants = this.treeControl.getDescendants(node);
-            console.log(parentNode.children)
+    // console.log(this.treeControl.dataNodes)
+this.treeControl.dataNodes.forEach(x=>{
+  if(x.level === 1 && this.getParentNode(x).item !== parent.item){
+    console.log(x)
+  }
+  // console.log(x)
+})
+    // this.parents.forEach(x=>{
+    //   this.treeControl.dataNodes
+    // })
+    // console.log(this.treeControl.getDescendants(parent))
+    // this.dataSource.data.forEach(parentNode => {
+    //      const descendants = parentNode.children;
 
 
-      // if (descendants.length && parent.item !== node.item) {
-      //   descendants.forEach(child => {
-      //     if (child.item === selectedNode.item) {
-      //       this.checklistSelection.toggle(child);
-      //     }
-      //   });
-      // }
-    });
+    //   if (descendants.length && parent.item !== parentNode.item) {
+    //     descendants.forEach(child => {
+    //       if (child.item === selectedNode.item) {
+    //         console.log(child)
+    //         this.checklistSelection.toggle(child);
+    //       }
+    //     });
+    //   }
+    // });
   }
 
 }
