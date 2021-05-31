@@ -9,19 +9,19 @@ import { TodoItemNode } from './todo-item-node';
 
 export const TREE_FULL_DATA = {
   'Tribe': {
-    'Almond Meal flour': null,
-    'Organic eggs': null,
-    'Protein Powder': null
+    'a': null,
+    'b': null,
+    'c': null
   },
   'Mesila': {
-    'Cook dinner':null,
-    'Read the Material Design spec':null,
-    'Upgrade Application to Angular':null
+    'a':null,
+    'e':null,
+    'f':null
   },
    'Rest': {
-    'Cook dinner':null,
-    'Read the Material Design spec':null,
-    'Upgrade Application to Angular':null
+    'g':null,
+    'h':null,
+    'i':null
   },
    'Web Client': {
     'Cook dinner':null,
@@ -178,9 +178,9 @@ filterTree(){
 
   /** Toggle a leaf to-do item selection. Check all the parents to see if they changed */
   todoLeafItemSelectionToggle(node: TodoItemFlatNode): void {
-       console.log(node)
-this.findDup(node)
+    
     this.checklistSelection.toggle(node);
+    this.findDup(node)
     this.checkAllParentsSelection(node);
   }
 
@@ -239,9 +239,10 @@ this.findDup(node)
 
    findDup(selectedNode) {
     const parent = this.getParentNode(selectedNode);
-    this.dataSource.data.forEach(node => {
-        const descendants = this.treeControl.getDescendants(node);
-        console.log(node)
+    console.log(this.treeControl.getDescendants(parent))
+    this.dataSource.data.forEach(parentNode => {
+        // const descendants = this.treeControl.getDescendants(node);
+            console.log(parentNode.children)
 
 
       // if (descendants.length && parent.item !== node.item) {
