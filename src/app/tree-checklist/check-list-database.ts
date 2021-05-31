@@ -36,8 +36,7 @@ export class ChecklistDatabase {
     //this.initialize();
   }
 
-  initialize() {
-    console.log('???????????????????');
+  initialize(permissionData) {
     // Build the tree nodes from Json object. The result is a list of `TodoItemNode` with nested
     //     file node as children.
     return this.buildFileTree(TREE_DATA, 0);
@@ -74,38 +73,5 @@ export class ChecklistDatabase {
 
       return accumulator.concat(node);
     }, []);
-  }
-
-  public filter(filterText: string) {
-    let filteredTreeData;
-    if (filterText) {
-      console.log(this.treeData);
-      filteredTreeData = this.treeData.filter(
-        d =>
-          d.text.toLocaleLowerCase().indexOf(filterText.toLocaleLowerCase()) >
-          -1
-      );
-      Object.assign([], filteredTreeData).forEach(ftd => {
-        let str = <string>ftd.code;
-        while (str.lastIndexOf('.') > -1) {
-          const index = str.lastIndexOf('.');
-          str = str.substring(0, index);
-          if (filteredTreeData.findIndex(t => t.code === str) === -1) {
-            const obj = this.treeData.find(d => d.code === str);
-            if (obj) {
-              filteredTreeData.push(obj);
-            }
-          }
-        }
-      });
-    } else {
-      filteredTreeData = this.treeData;
-    }
-
-    // Build the tree nodes from Json object. The result is a list of `TodoItemNode` with nested
-    // file node as children.
-    const data = this.buildFileTree(filteredTreeData, 0);
-    // Notify the change.
-    this.dataChange.next(data);
   }
 }
