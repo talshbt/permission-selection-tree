@@ -26,14 +26,14 @@ export const TREE_FULL_DATA = {
     'i': null
   },
   'Web Client': {
-    'פתיחת פורט 443 לארטיקפטורי': null,
-    'פתיחת בקשת לגישה לביטבאקט (פורט 7999)': null,
-    'REST פתיחת פורט לשירותי ': null,
-    'Open Port Jenkins - deployment ': null,
-    'Open Port Jenkins - WEB': null,
-    'פתיחת קבוצות FW לopenShift': null,
-    'RBI פתיחת PORTS לשימוש ב': null,
-    'WebX port פתיחת פורט לווב-אקס': null
+    'פתיחת פורט 443 לארטיקפטורי': Status.Has_Permission,
+    'פתיחת בקשת לגישה לביטבאקט (פורט 7999)': Status.Has_Permission,
+    'REST פתיחת פורט לשירותי ': Status.No_Permission,
+    'Open Port Jenkins - deployment ': Status.Has_Permission,
+    'Open Port Jenkins - WEB': Status.Has_Permission,
+    'פתיחת קבוצות FW לopenShift': Status.No_Permission,
+    'RBI פתיחת PORTS לשימוש ב': Status.Has_Permission,
+    'WebX port פתיחת פורט לווב-אקס': Status.Has_Permission
 
   },
   'Main Frame': {
