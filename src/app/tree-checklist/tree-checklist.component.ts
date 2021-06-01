@@ -4,18 +4,19 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { PermissionService } from '../permission.service';
 import { ChecklistDatabase } from './check-list-database';
+import { Status } from './status.enum';
 import { TodoItemFlatNode } from './todo-item-flat-node';
 import { TodoItemNode } from './todo-item-node';
 
 export const TREE_FULL_DATA = {
   'Tribe': {
-    'a': true,
-   'b': false,
+    'a': Status.In_Progress,
+    'b': false,
     'c': false,
   }
   ,
   'Mesila': {
-    'a': true,
+    'a': Status.In_Progress,
     'e': false,
     'f': false
   },
@@ -29,11 +30,11 @@ export const TREE_FULL_DATA = {
     'פתיחת בקשת לגישה לביטבאקט (פורט 7999)': null,
     'REST פתיחת פורט לשירותי ': null,
     'Open Port Jenkins - deployment ': null,
-    'Open Port Jenkins - WEB':null,
-    'פתיחת קבוצות FW לopenShift':null,
-    'RBI פתיחת PORTS לשימוש ב':null,
-    'WebX port פתיחת פורט לווב-אקס':null
-    
+    'Open Port Jenkins - WEB': null,
+    'פתיחת קבוצות FW לopenShift': null,
+    'RBI פתיחת PORTS לשימוש ב': null,
+    'WebX port פתיחת פורט לווב-אקס': null
+
   },
   'Main Frame': {
     'Cook dinner': null,
@@ -60,7 +61,7 @@ export const TREE_FULL_DATA = {
   providers: [ChecklistDatabase]
 
 })
-export class TreeChecklistComponent implements OnInit{
+export class TreeChecklistComponent implements OnInit {
 
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
   flatNodeMap = new Map<TodoItemFlatNode, TodoItemNode>();
@@ -254,20 +255,20 @@ export class TreeChecklistComponent implements OnInit{
     this.treeControl.dataNodes.forEach(child => {
       if (child.level === 1 && this.getParentNode(child).item !== parent.item && selectedNode.item === child.item) {
         console.log(child)
-         this.checklistSelection.toggle(child);
+        this.checklistSelection.toggle(child);
       }
     })
   }
- getKeyByValue(object, value) {
-  return Object.keys(object).find(key => object[key] === value);
-}
-  initSelections(){
+  getKeyByValue(object, value) {
+    return Object.keys(object).find(key => object[key] === value);
+  }
+  initSelections() {
     for (let i = 0; i < this.treeControl.dataNodes.length; i++) {
       var toFind;
-       if(!!TREE_FULL_DATA[this.treeControl.dataNodes[i].item]){
-           toFind = this.getKeyByValue(TREE_FULL_DATA[this.treeControl.dataNodes[i].item], true);
-       }
-      if (this.treeControl.dataNodes[i].item == toFind ) {
+      if (!!TREE_FULL_DATA[this.treeControl.dataNodes[i].item]) {
+        toFind = this.getKeyByValue(TREE_FULL_DATA[this.treeControl.dataNodes[i].item], true);
+      }
+      if (this.treeControl.dataNodes[i].item == toFind) {
         this.todoItemSelectionToggle(this.treeControl.dataNodes[i]);
         this.treeControl.expand(this.treeControl.dataNodes[i])
       }
