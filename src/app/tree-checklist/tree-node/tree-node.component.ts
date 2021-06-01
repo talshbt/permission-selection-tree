@@ -9,17 +9,16 @@ import { TodoItemFlatNode } from '../todo-item-flat-node';
 })
 export class TreeNodeComponent implements OnInit {
   @Input() node;
-  isDisable;
   @Input() isChecked;
   @Input() status;
   @Output() toggleNode: EventEmitter<TodoItemFlatNode> = new EventEmitter();
-  type: Status;
+  type = Status;
+  isDisable;
 
   constructor() {}
 
   ngOnInit() {
     this.isDisable = this.status === Status.Has_Permission;
-    console.log(this.status === Status.Has_Permission);
   }
 
   onToggleNode(node: TodoItemFlatNode): void {
