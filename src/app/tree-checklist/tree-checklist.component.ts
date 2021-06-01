@@ -1,6 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { PermissionService } from '../permission.service';
 import { ChecklistDatabase } from './check-list-database';
@@ -21,7 +21,7 @@ export const TREE_FULL_DATA = {
   },
   'Rest': {
     'g': null,
-    'h': null,
+    'a': null,
     'i': null
   },
   'Web Client': {
@@ -54,7 +54,7 @@ export const TREE_FULL_DATA = {
   providers: [ChecklistDatabase]
 
 })
-export class TreeChecklistComponent implements OnInit {
+export class TreeChecklistComponent implements OnInit , AfterViewInit{
 
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
   flatNodeMap = new Map<TodoItemFlatNode, TodoItemNode>();
@@ -80,6 +80,23 @@ export class TreeChecklistComponent implements OnInit {
   constructor(private _database: ChecklistDatabase, private permissionService: PermissionService) {
 
   }
+
+    ngAfterViewInit() {
+      // console.log(this.treeControl.dataNodes.length)
+    for (let i = 0; i < this.treeControl.dataNodes.length; i++) {
+      console.log(this.treeControl.dataNodes[i].item)
+      if (this.treeControl.dataNodes[i].item == 'a') {
+        this.todoItemSelectionToggle(this.treeControl.dataNodes[i]);
+        this.treeControl.expand(this.treeControl.dataNodes[i])
+      }
+      if (this.treeControl.dataNodes[i].item == 'g') {
+        this.treeControl.expand(this.treeControl.dataNodes[i])
+      }
+    }
+  }
+
+
+
   ngOnInit(): void {
 
     this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel,
@@ -101,6 +118,8 @@ export class TreeChecklistComponent implements OnInit {
       //console.log(parentNode);
       const filterTree = this.filterTree()
       this.dataSource.data = this._database.initialize(filterTree);
+
+      this.initSelections();
 
       // this.dataSource.data = this.database.initialData(permissionData);
     });
@@ -250,7 +269,14 @@ export class TreeChecklistComponent implements OnInit {
   }
 
   initSelections(){
-
+    //  console.log(this.treeControl.dataNodes.length)
+    for (let i = 0; i < this.treeControl.dataNodes.length; i++) {
+       console.log(this.treeControl.dataNodes[i].item)
+      if (this.treeControl.dataNodes[i].item == 'a' || this.treeControl.dataNodes[i].item == 'g') {
+        this.todoItemSelectionToggle(this.treeControl.dataNodes[i]);
+        this.treeControl.expand(this.treeControl.dataNodes[i])
+      }
+    }
   }
 
 }
