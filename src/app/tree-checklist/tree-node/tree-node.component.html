@@ -2,8 +2,12 @@
   <mat-expansion-panel hideToggle>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <mat-checkbox (change)="onToggleNode(node)" class="checklist-leaf-node" [checked]="isChecked"
-          [disabled]="isDisable">
+        <mat-checkbox
+          (change)="onToggleNode(node)"
+          class="checklist-leaf-node"
+          [checked]="isChecked"
+          [disabled]="isDisable"
+        >
           {{node.item}}
         </mat-checkbox>
       </mat-panel-title>
@@ -17,12 +21,12 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
     <mat-form-field>
-      <mat-label>First name</mat-label>
-      <input matInput>
+      <mat-label>ip</mat-label>
+      <input matInput />
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Age</mat-label>
-      <input matInput type="number" min="1">
+      <mat-label>export excel</mat-label>
+      <input matInput type="number" min="1" />
     </mat-form-field>
   </mat-expansion-panel>
 </mat-accordion>
