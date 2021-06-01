@@ -26,7 +26,7 @@ export const TREE_FULL_DATA = {
     'i': null
   },
   'Web Client': {
-    'פתיחת פורט 443 לארטיקפטורי': Status.Has_Permission,
+    'פתיחת פורט 443 לארטיקפטורי': Status.In_Progress,
     'פתיחת בקשת לגישה לביטבאקט (פורט 7999)': Status.Has_Permission,
     'REST פתיחת פורט לשירותי ': Status.No_Permission,
     'Open Port Jenkins - deployment ': Status.Has_Permission,
