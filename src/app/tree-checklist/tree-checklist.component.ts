@@ -20,7 +20,7 @@ export const TREE_FULL_DATA = {
     'f': false
   },
   'Rest': {
-    'xpRestDevUsersPRD': null,
+    'xpRestDevUsersPRD הוספה לקבוצה ': null,
     'a': null,
     'i': null
   },
