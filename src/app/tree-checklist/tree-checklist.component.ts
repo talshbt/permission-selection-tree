@@ -10,15 +10,15 @@ import { TodoItemNode } from './todo-item-node';
 
 export const TREE_FULL_DATA = {
   'Tribe': {
-    'a': Status.In_Progress,
-    'b': false,
-    'c': false,
+    'a': Status.Has_Permission,
+    'b': Status.No_Permission,
+    'c': Status.In_Progress,
   }
   ,
   'Mesila': {
-    'a': Status.In_Progress,
-    'e': false,
-    'f': false
+    'a': Status.Has_Permission,
+    'e': Status.No_Permission,
+    'f': Status.No_Permission
   },
   'Rest': {
     'xpRestDevUsersPRD הוספה לקבוצה ': null,
@@ -262,13 +262,22 @@ export class TreeChecklistComponent implements OnInit {
   getKeyByValue(object, value) {
     return Object.keys(object).find(key => object[key] === value);
   }
+
   initSelections() {
     for (let i = 0; i < this.treeControl.dataNodes.length; i++) {
-      var toFind;
+      var hasPremission;
+      var inProgress;
+
       if (!!TREE_FULL_DATA[this.treeControl.dataNodes[i].item]) {
-        toFind = this.getKeyByValue(TREE_FULL_DATA[this.treeControl.dataNodes[i].item], true);
+       hasPremission = this.getKeyByValue(TREE_FULL_DATA[this.treeControl.dataNodes[i].item], Status.Has_Permission);
+        inProgress = this.getKeyByValue(TREE_FULL_DATA[this.treeControl.dataNodes[i].item], Status.In_Progress);
+
+                console.log('hasPremission ' + hasPremission);
+                console.log('inProgress ' + inProgress);
+
+
       }
-      if (this.treeControl.dataNodes[i].item == toFind) {
+      if (this.treeControl.dataNodes[i].item == hasPremission || this.treeControl.dataNodes[i].item == inProgress) {
         this.todoItemSelectionToggle(this.treeControl.dataNodes[i]);
         this.treeControl.expand(this.treeControl.dataNodes[i])
       }

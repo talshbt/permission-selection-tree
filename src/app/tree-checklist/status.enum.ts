@@ -1,5 +1,5 @@
 export enum Status {
-  Open,
+  Has_Permission,
   In_Progress,
-  Close
+  No_Permission
 }
