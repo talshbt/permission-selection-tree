@@ -11,6 +11,7 @@
       (change)="todoLeafItemSelectionToggle(node)"
       >{{node.item}}</mat-checkbox
     >
+    <div *ngIf="isDisabled(node)">xxxxxxxxx</div>
   </mat-tree-node>
 
   <!-- <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>

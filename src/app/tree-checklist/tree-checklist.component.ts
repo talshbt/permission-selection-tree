@@ -252,6 +252,7 @@ export class TreeChecklistComponent implements OnInit {
 
   findDup(selectedNode) {
     const parent = this.getParentNode(selectedNode);
+
     this.treeControl.dataNodes.forEach(child => {
       if (child.level === 1 && this.getParentNode(child).item !== parent.item && selectedNode.item === child.item) {
         console.log(child)
@@ -263,6 +264,16 @@ export class TreeChecklistComponent implements OnInit {
     return Object.keys(object).find(key => object[key] === value);
   }
 
+  isDisabled(node){
+
+    
+    const parent = this.getParentNode(node);
+    return TREE_FULL_DATA[parent.item][node.item] == Status.Has_Permission;
+          // const hasPremission = this.getKeyByValue(node.item, Status.Has_Permission);
+
+
+  }
+
   initSelections() {
     for (let i = 0; i < this.treeControl.dataNodes.length; i++) {
       var hasPremission;
@@ -272,8 +283,8 @@ export class TreeChecklistComponent implements OnInit {
        hasPremission = this.getKeyByValue(TREE_FULL_DATA[this.treeControl.dataNodes[i].item], Status.Has_Permission);
         inProgress = this.getKeyByValue(TREE_FULL_DATA[this.treeControl.dataNodes[i].item], Status.In_Progress);
 
-                console.log('hasPremission ' + hasPremission);
-                console.log('inProgress ' + inProgress);
+                // console.log('hasPremission ' + hasPremission);
+                // console.log('inProgress ' + inProgress);
 
 
       }
