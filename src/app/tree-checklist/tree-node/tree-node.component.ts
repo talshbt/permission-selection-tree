@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Status } from '../status.enum';
 import { TodoItemFlatNode } from '../todo-item-flat-node';
 
 @Component({
@@ -8,25 +9,20 @@ import { TodoItemFlatNode } from '../todo-item-flat-node';
 })
 export class TreeNodeComponent implements OnInit {
   @Input() node;
-  @Input() isDisable;
+  isDisable;
   @Input() isChecked;
+  @Input() status;
   @Output() toggleNode: EventEmitter<TodoItemFlatNode> = new EventEmitter();
+  type: Status;
 
   constructor() {}
 
   ngOnInit() {
-    console.log(this.node);
+    this.isDisable = this.status === Status.Has_Permission;
+    console.log(this.status === Status.Has_Permission);
   }
+
   onToggleNode(node: TodoItemFlatNode): void {
     this.toggleNode.emit(node);
-    // this.checklistSelection.toggle(node);
-    // this.findDup(node)
-    // this.checkAllParentsSelection(node);
   }
-  // todoLeafItemSelectionToggle(node: TodoItemFlatNode): void {
-
-  //   this.checklistSelection.toggle(node);
-  //   this.findDup(node)
-  //   this.checkAllParentsSelection(node);
-  // }
 }

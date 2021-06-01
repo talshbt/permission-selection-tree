@@ -264,13 +264,14 @@ export class TreeChecklistComponent implements OnInit {
   }
 
   isDisabled(node){
-
-    
     const parent = this.getParentNode(node);
     return TREE_FULL_DATA[parent.item][node.item] == Status.Has_Permission;
           // const hasPremission = this.getKeyByValue(node.item, Status.Has_Permission);
+  }
 
-
+  getNodeStatus(node){
+    const parent = this.getParentNode(node);
+    return TREE_FULL_DATA[parent.item][node.item];
   }
 
   initSelections() {
