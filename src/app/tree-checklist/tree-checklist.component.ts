@@ -256,18 +256,12 @@ export class TreeChecklistComponent implements OnInit{
   return Object.keys(object).find(key => object[key] === value);
 }
   initSelections(){
-    //  console.log(this.treeControl.dataNodes.length)
     for (let i = 0; i < this.treeControl.dataNodes.length; i++) {
       var toFind;
-      //  console.log(this.treeControl.dataNodes[i].item)
        if(!!TREE_FULL_DATA[this.treeControl.dataNodes[i].item]){
-        //  console.log(TREE_FULL_DATA[this.treeControl.dataNodes[i].item])
            toFind = this.getKeyByValue(TREE_FULL_DATA[this.treeControl.dataNodes[i].item], true);
        }
-
       if (this.treeControl.dataNodes[i].item == toFind ) {
-                //  console.log(TREE_FULL_DATA[this.treeControl.dataNodes[i].item])
-
         this.todoItemSelectionToggle(this.treeControl.dataNodes[i]);
         this.treeControl.expand(this.treeControl.dataNodes[i])
       }
