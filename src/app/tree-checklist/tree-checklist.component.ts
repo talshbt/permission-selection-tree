@@ -25,9 +25,15 @@ export const TREE_FULL_DATA = {
     'i': null
   },
   'Web Client': {
-    'Cook dinner': null,
-    'Read the Material Design spec': null,
-    'Upgrade Application to Angular': null
+    'פתיחת פורט 443 לארטיקפטורי': null,
+    'פתיחת בקשת לגישה לביטבאקט (פורט 7999)': null,
+    'REST פתיחת פורט לשירותי ': null,
+    'Open Port Jenkins - deployment ': null,
+    'Open Port Jenkins - WEB':null,
+    'פתיחת קבוצות FW לopenShift':null,
+    'RBI פתיחת PORTS לשימוש ב':null,
+    'WebX port פתיחת פורט לווב-אקס':null
+    
   },
   'Main Frame': {
     'Cook dinner': null,
