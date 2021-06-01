@@ -10,14 +10,14 @@ import { TodoItemNode } from './todo-item-node';
 export const TREE_FULL_DATA = {
   'Tribe': {
     'a': true,
-   'b': null,
-    'c': null,
+   'b': false,
+    'c': false,
   }
   ,
   'Mesila': {
-    'a': null,
-    'e': null,
-    'f': null
+    'a': true,
+    'e': false,
+    'f': false
   },
   'Rest': {
     'g': null,
@@ -267,12 +267,22 @@ export class TreeChecklistComponent implements OnInit , AfterViewInit{
       }
     })
   }
-
+ getKeyByValue(object, value) {
+  return Object.keys(object).find(key => object[key] === value);
+}
   initSelections(){
     //  console.log(this.treeControl.dataNodes.length)
     for (let i = 0; i < this.treeControl.dataNodes.length; i++) {
-       console.log(this.treeControl.dataNodes[i].item)
-      if (this.treeControl.dataNodes[i].item == 'a' || this.treeControl.dataNodes[i].item == 'g') {
+      var toFind;
+      //  console.log(this.treeControl.dataNodes[i].item)
+       if(!!TREE_FULL_DATA[this.treeControl.dataNodes[i].item]){
+        //  console.log(TREE_FULL_DATA[this.treeControl.dataNodes[i].item])
+           toFind = this.getKeyByValue(TREE_FULL_DATA[this.treeControl.dataNodes[i].item], true);
+       }
+
+      if (this.treeControl.dataNodes[i].item == toFind ) {
+                //  console.log(TREE_FULL_DATA[this.treeControl.dataNodes[i].item])
+
         this.todoItemSelectionToggle(this.treeControl.dataNodes[i]);
         this.treeControl.expand(this.treeControl.dataNodes[i])
       }
