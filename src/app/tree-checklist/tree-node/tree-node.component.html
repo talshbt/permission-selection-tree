@@ -9,16 +9,11 @@
       </mat-panel-title>
       <mat-panel-description>
         Type your name and age
-        <!-- <mat-icon>account_circle</mat-icon>
-        <mat-icon>done</mat-icon>
-        <mat-icon>schedule</mat-icon> -->
-
         <div [ngSwitch]="status">
           <mat-icon *ngSwitchCase="type.Has_Permission">lock_open</mat-icon>
           <mat-icon *ngSwitchCase="type.In_Progress">pending</mat-icon>
           <mat-icon *ngSwitchCase="type.No_Permission">lock</mat-icon>
         </div>
-
       </mat-panel-description>
     </mat-expansion-panel-header>
     <mat-form-field>
@@ -31,8 +26,3 @@
     </mat-form-field>
   </mat-expansion-panel>
 </mat-accordion>
-
-
-<!-- Has_Permission,
-  In_Progress,
-  No_Permission -->
