@@ -54,7 +54,7 @@ export const TREE_FULL_DATA = {
   providers: [ChecklistDatabase]
 
 })
-export class TreeChecklistComponent implements OnInit , AfterViewInit{
+export class TreeChecklistComponent implements OnInit{
 
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
   flatNodeMap = new Map<TodoItemFlatNode, TodoItemNode>();
@@ -80,21 +80,6 @@ export class TreeChecklistComponent implements OnInit , AfterViewInit{
   constructor(private _database: ChecklistDatabase, private permissionService: PermissionService) {
 
   }
-
-    ngAfterViewInit() {
-      // console.log(this.treeControl.dataNodes.length)
-    for (let i = 0; i < this.treeControl.dataNodes.length; i++) {
-      console.log(this.treeControl.dataNodes[i].item)
-      if (this.treeControl.dataNodes[i].item == 'a') {
-        this.todoItemSelectionToggle(this.treeControl.dataNodes[i]);
-        this.treeControl.expand(this.treeControl.dataNodes[i])
-      }
-      if (this.treeControl.dataNodes[i].item == 'g') {
-        this.treeControl.expand(this.treeControl.dataNodes[i])
-      }
-    }
-  }
-
 
 
   ngOnInit(): void {
