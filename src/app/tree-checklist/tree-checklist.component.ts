@@ -191,7 +191,6 @@ export class TreeChecklistComponent implements OnInit {
 
   /** Toggle a leaf to-do item selection. Check all the parents to see if they changed */
   todoLeafItemSelectionToggle(node: TodoItemFlatNode): void {
-
     this.checklistSelection.toggle(node);
     this.findDup(node)
     this.checkAllParentsSelection(node);

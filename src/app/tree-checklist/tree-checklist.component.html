@@ -1,7 +1,8 @@
 <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
   <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
     <button mat-icon-button disabled></button>
-    <app-tree-node [node]="node" [isDisable]="isDisabled(node)" [isChecked]="checklistSelection.isSelected(node)">
+    <app-tree-node (toggleNode)="todoLeafItemSelectionToggle($event)" [node]="node" [isDisable]="isDisabled(node)"
+      [isChecked]="checklistSelection.isSelected(node)">
     </app-tree-node>
     <!-- <mat-accordion class="example-headers-align" multi>
       <mat-expansion-panel>

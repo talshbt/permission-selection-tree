@@ -2,11 +2,11 @@
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <mat-checkbox class="checklist-leaf-node" [checked]="isChecked"
-               [disabled]="isDisable">
+        <mat-checkbox (change)="onToggleNode(node)" class="checklist-leaf-node" [checked]="isChecked"
+          [disabled]="isDisable">
 
-               <!-- (change)="todoLeafItemSelectionToggle(node)" -->
-        <!-- <mat-checkbox class="checklist-leaf-node"> -->
+          <!-- (change)="todoLeafItemSelectionToggle(node)" -->
+          <!-- <mat-checkbox class="checklist-leaf-node"> -->
 
           {{node.item}}
         </mat-checkbox>
