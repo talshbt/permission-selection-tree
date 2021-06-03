@@ -6,7 +6,7 @@ import { PermissionService } from '../permission.service';
 import { ChecklistDatabase } from './check-list-database';
 import { Status } from './status.enum';
 import { TodoItemFlatNode } from './todo-item-flat-node';
-import { TodoItemNode } from './todo-item-node';
+import { Node } from './node';
 
 export const TREE_FULL_DATA = {
   'Tribe': {
@@ -64,10 +64,10 @@ export const TREE_FULL_DATA = {
 export class TreeChecklistComponent implements OnInit {
 
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
-  flatNodeMap = new Map<TodoItemFlatNode, TodoItemNode>();
+  flatNodeMap = new Map<TodoItemFlatNode, Node>();
 
   /** Map from nested node to flattened node. This helps us to keep the same object for selection */
-  nestedNodeMap = new Map<TodoItemNode, TodoItemFlatNode>();
+  nestedNodeMap = new Map<Node, TodoItemFlatNode>();
 
   /** A selected parent node to be inserted */
   selectedParent: TodoItemFlatNode | null = null;
@@ -77,9 +77,9 @@ export class TreeChecklistComponent implements OnInit {
 
   treeControl: FlatTreeControl<TodoItemFlatNode>;
 
-  treeFlattener: MatTreeFlattener<TodoItemNode, TodoItemFlatNode>;
+  treeFlattener: MatTreeFlattener<Node, TodoItemFlatNode>;
 
-  dataSource: MatTreeFlatDataSource<TodoItemNode, TodoItemFlatNode>;
+  dataSource: MatTreeFlatDataSource<Node, TodoItemFlatNode>;
 
   /** The selection for checklist */
   checklistSelection = new SelectionModel<TodoItemFlatNode>(true /* multiple */);
@@ -137,7 +137,7 @@ export class TreeChecklistComponent implements OnInit {
 
   isExpandable = (node: TodoItemFlatNode) => node.expandable;
 
-  getChildren = (node: TodoItemNode): TodoItemNode[] => node.children;
+  getChildren = (node: Node): Node[] => node.children;
 
   hasChild = (_: number, _nodeData: TodoItemFlatNode) => _nodeData.expandable;
 
@@ -146,7 +146,7 @@ export class TreeChecklistComponent implements OnInit {
   /**
    * Transformer to convert nested node to flat node. Record the nodes in maps for later use.
    */
-  transformer = (node: TodoItemNode, level: number) => {
+  transformer = (node: Node, level: number) => {
     const existingNode = this.nestedNodeMap.get(node);
     const flatNode = existingNode && existingNode.item === node.item
       ? existingNode

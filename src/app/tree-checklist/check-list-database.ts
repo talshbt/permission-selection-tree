@@ -2,7 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { PermissionService } from '../permission.service';
 import { TodoItemFlatNode } from './todo-item-flat-node';
-import { TodoItemNode } from './todo-item-node';
+import { Node } from './node';
 // import { TREE_DATA } from './tree-data';
 
 @Injectable({ providedIn: 'root' })
