@@ -1,16 +1,16 @@
 import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { PermissionService } from '../permission.service';
-import { TodoItemFlatNode } from './todo-item-flat-node';
+import { FlatNode } from './flat-node';
 import { Node } from './node';
 // import { TREE_DATA } from './tree-data';
 
 @Injectable({ providedIn: 'root' })
 export class ChecklistDatabase {
   treeData = [];
-  dataChange = new BehaviorSubject<TodoItemNode[]>([]);
+  dataChange = new BehaviorSubject<Node[]>([]);
 
-  get data(): TodoItemNode[] {
+  get data(): Node[] {
     return this.dataChange.value;
   }
 
@@ -25,19 +25,19 @@ export class ChecklistDatabase {
   rootLevelNodes: string[] = [];
 
   /** Initial data from database */
-  initialData(permissionData): TodoItemFlatNode[] {
+  initialData(permissionData): FlatNode[] {
     this.rootLevelNodes = permissionData;
-    return this.rootLevelNodes.map(name => new TodoItemFlatNode(name, 0, true));
+    return this.rootLevelNodes.map(name => new FlatNode(name, 0, true));
   }
 
   /**
    * Build the file structure tree. The `value` is the Json object, or a sub-tree of a Json object.
    * The return value is the list of `TodoItemNode`.
    */
-  buildFileTree(obj: { [key: string]: any }, level: number): TodoItemNode[] {
-    return Object.keys(obj).reduce<TodoItemNode[]>((accumulator, key) => {
+  buildFileTree(obj: { [key: string]: any }, level: number): Node[] {
+    return Object.keys(obj).reduce<Node[]>((accumulator, key) => {
       const value = obj[key];
-      const node = new TodoItemNode();
+      const node = new Node();
       node.item = key;
 
       if (value != null) {

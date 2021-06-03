@@ -5,8 +5,8 @@ import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree'
 import { PermissionService } from '../permission.service';
 import { ChecklistDatabase } from './check-list-database';
 import { Status } from './status.enum';
-import { TodoItemFlatNode } from './todo-item-flat-node';
 import { Node } from './node';
+import { FlatNode } from './flat-node';
 
 export const TREE_FULL_DATA = {
   'Tribe': {
@@ -64,25 +64,25 @@ export const TREE_FULL_DATA = {
 export class TreeChecklistComponent implements OnInit {
 
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
-  flatNodeMap = new Map<TodoItemFlatNode, Node>();
+  flatNodeMap = new Map<FlatNode, Node>();
 
   /** Map from nested node to flattened node. This helps us to keep the same object for selection */
-  nestedNodeMap = new Map<Node, TodoItemFlatNode>();
+  nestedNodeMap = new Map<Node, FlatNode>();
 
   /** A selected parent node to be inserted */
-  selectedParent: TodoItemFlatNode | null = null;
+  selectedParent: FlatNode | null = null;
 
   /** The new item's name */
   newItemName = '';
 
-  treeControl: FlatTreeControl<TodoItemFlatNode>;
+  treeControl: FlatTreeControl<FlatNode>;
 
-  treeFlattener: MatTreeFlattener<Node, TodoItemFlatNode>;
+  treeFlattener: MatTreeFlattener<Node, FlatNode>;
 
-  dataSource: MatTreeFlatDataSource<Node, TodoItemFlatNode>;
+  dataSource: MatTreeFlatDataSource<Node, FlatNode>;
 
   /** The selection for checklist */
-  checklistSelection = new SelectionModel<TodoItemFlatNode>(true /* multiple */);
+  checklistSelection = new SelectionModel<FlatNode>(true /* multiple */);
 
   constructor(private _database: ChecklistDatabase, private permissionService: PermissionService) {
 
@@ -93,7 +93,7 @@ export class TreeChecklistComponent implements OnInit {
 
     this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel,
       this.isExpandable, this.getChildren);
-    this.treeControl = new FlatTreeControl<TodoItemFlatNode>(this.getLevel, this.isExpandable);
+    this.treeControl = new FlatTreeControl<FlatNode>(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
     this._database.dataChange.subscribe(data => {
       this.dataSource.data = data;
@@ -133,15 +133,15 @@ export class TreeChecklistComponent implements OnInit {
 
   }
 
-  getLevel = (node: TodoItemFlatNode) => node.level;
+  getLevel = (node: FlatNode) => node.level;
 
-  isExpandable = (node: TodoItemFlatNode) => node.expandable;
+  isExpandable = (node: FlatNode) => node.expandable;
 
   getChildren = (node: Node): Node[] => node.children;
 
-  hasChild = (_: number, _nodeData: TodoItemFlatNode) => _nodeData.expandable;
+  hasChild = (_: number, _nodeData: FlatNode) => _nodeData.expandable;
 
-  hasNoContent = (_: number, _nodeData: TodoItemFlatNode) => _nodeData.item === '';
+  hasNoContent = (_: number, _nodeData: FlatNode) => _nodeData.item === '';
 
   /**
    * Transformer to convert nested node to flat node. Record the nodes in maps for later use.
@@ -150,7 +150,7 @@ export class TreeChecklistComponent implements OnInit {
     const existingNode = this.nestedNodeMap.get(node);
     const flatNode = existingNode && existingNode.item === node.item
       ? existingNode
-      : new TodoItemFlatNode();
+      : new FlatNode();
     flatNode.item = node.item;
     flatNode.level = level;
     flatNode.expandable = !!node.children?.length;
@@ -160,7 +160,7 @@ export class TreeChecklistComponent implements OnInit {
   }
 
   /** Whether all the descendants of the node are selected. */
-  descendantsAllSelected(node: TodoItemFlatNode): boolean {
+  descendantsAllSelected(node: FlatNode): boolean {
     const descendants = this.treeControl.getDescendants(node);
     const descAllSelected = descendants.length > 0 && descendants.every(child => {
       return this.checklistSelection.isSelected(child);
@@ -169,14 +169,14 @@ export class TreeChecklistComponent implements OnInit {
   }
 
   /** Whether part of the descendants are selected */
-  descendantsPartiallySelected(node: TodoItemFlatNode): boolean {
+  descendantsPartiallySelected(node: FlatNode): boolean {
     const descendants = this.treeControl.getDescendants(node);
     const result = descendants.some(child => this.checklistSelection.isSelected(child));
     return result && !this.descendantsAllSelected(node);
   }
 
   /** Toggle the to-do item selection. Select/deselect all the descendants node */
-  todoItemSelectionToggle(node: TodoItemFlatNode): void {
+  todoItemSelectionToggle(node: FlatNode): void {
     // console.log(node)
     this.checklistSelection.toggle(node);
     const descendants = this.treeControl.getDescendants(node);
@@ -190,15 +190,15 @@ export class TreeChecklistComponent implements OnInit {
   }
 
   /** Toggle a leaf to-do item selection. Check all the parents to see if they changed */
-  todoLeafItemSelectionToggle(node: TodoItemFlatNode): void {
+  todoLeafItemSelectionToggle(node: FlatNode): void {
     this.checklistSelection.toggle(node);
     this.findDup(node)
     this.checkAllParentsSelection(node);
   }
 
   /* Checks all the parents when a leaf node is selected/unselected */
-  checkAllParentsSelection(node: TodoItemFlatNode): void {
-    let parent: TodoItemFlatNode | null = this.getParentNode(node);
+  checkAllParentsSelection(node: FlatNode): void {
+    let parent: FlatNode | null = this.getParentNode(node);
     while (parent) {
       this.checkRootNodeSelection(parent);
       parent = this.getParentNode(parent);
@@ -206,7 +206,7 @@ export class TreeChecklistComponent implements OnInit {
   }
 
   /** Check root node checked state and change it accordingly */
-  checkRootNodeSelection(node: TodoItemFlatNode): void {
+  checkRootNodeSelection(node: FlatNode): void {
     const nodeSelected = this.checklistSelection.isSelected(node);
     const descendants = this.treeControl.getDescendants(node);
     const descAllSelected = descendants.length > 0 && descendants.every(child => {
@@ -220,7 +220,7 @@ export class TreeChecklistComponent implements OnInit {
   }
 
   /* Get the parent node of a node */
-  getParentNode(node: TodoItemFlatNode): TodoItemFlatNode | null {
+  getParentNode(node: FlatNode): FlatNode | null {
     const currentLevel = this.getLevel(node);
 
     if (currentLevel < 1) {
