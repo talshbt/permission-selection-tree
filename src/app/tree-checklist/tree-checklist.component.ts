@@ -3,10 +3,10 @@ import { FlatTreeControl } from '@angular/cdk/tree';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { PermissionService } from '../permission.service';
-import { ChecklistDatabase } from './check-list-database';
 import { Status } from './status.enum';
 import { Node } from './node';
 import { FlatNode } from './flat-node';
+import { TreeDatabase } from './tree-database';
 
 export const TREE_FULL_DATA = {
   'Tribe': {
@@ -58,7 +58,7 @@ export const TREE_FULL_DATA = {
   selector: 'app-tree-checklist',
   templateUrl: './tree-checklist.component.html',
   styleUrls: ['./tree-checklist.component.css'],
-  providers: [ChecklistDatabase]
+  providers: [TreeDatabase]
 
 })
 export class TreeChecklistComponent implements OnInit {
@@ -84,7 +84,7 @@ export class TreeChecklistComponent implements OnInit {
   /** The selection for checklist */
   checklistSelection = new SelectionModel<FlatNode>(true /* multiple */);
 
-  constructor(private _database: ChecklistDatabase, private permissionService: PermissionService) {
+  constructor(private _database: TreeDatabase, private permissionService: PermissionService) {
 
   }
 

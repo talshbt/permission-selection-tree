@@ -6,7 +6,7 @@ import { Node } from './node';
 // import { TREE_DATA } from './tree-data';
 
 @Injectable({ providedIn: 'root' })
-export class ChecklistDatabase {
+export class TreeDatabase {
   treeData = [];
   dataChange = new BehaviorSubject<Node[]>([]);
 
